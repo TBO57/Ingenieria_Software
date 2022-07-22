@@ -1,0 +1,37 @@
+
+.div_sp_dashoperador{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_sp_dashoperador > button{
+    padding: 40px;
+    height: 120px;
+    width: 162px;
+    border-radius: 6px;
+}
+
+#bt1_sp{
+    margin-right: 50px;
+}
+
+.div_if_dashoperador{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_if_dashoperador > button{
+    padding: 40px;
+    height: 120px;
+    width: 162px;
+    border-radius: 6px;
+    
+}
+
+#bt1_if{
+    margin-right: 50px;
+}
