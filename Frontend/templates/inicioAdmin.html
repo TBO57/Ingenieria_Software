@@ -5,33 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = icon href = "{{ url_for('static', filename = 'img/logo_unicor.svg') }}"/>
-    <title>Recargas</title>
+    <title>Dashboard</title>
     <!-- Boostrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- Css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/recarga.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/dashAdmin.css') }}">
 </head>
 <body>
-
-    <div class="div_main">
-
-        <div className="modal-body p-5 pt-0">
-
-        <p>N° de documento</p>
+    
+    <div class="div_sp_dashadmin" > 
+    
+        <button type="button" class="btn btn-success" id="bt1_sp"> REGISTRAR OPERADOR </button>
+        <button type="button" class="btn btn-success" id="bt2_sp"> REPORTE DE VENTAS </button>
+        <button type="button" class="btn btn-success"> REGISTRAR ESTUDIANTE </button>
         
-        <p> ------------------------------------------- </p>
-
-        <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/>
-
-        <input type='text' className='form-control mb-3' name='apellido' placeholder='Apellido' disabled/>
-
-        <input type='number' className='form-control mb-3' name='almuerzos' placeholder='Numero de almuerzos' />
-
-        </div>
 
     </div>
+    
+    <div class="div_if_dashadmin">  
+    
+        <button type="button" class="btn btn-success" id="bt1_if"> RECARGAR </button>
+        <button type="button" class="btn btn-success" id="bt2_if"> ACTUALIZAR ESTUDIANTE </button>
+        
+    </div>
 
-
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>

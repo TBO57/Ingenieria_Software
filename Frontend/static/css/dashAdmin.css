@@ -1,0 +1,46 @@
+
+.div_sp_dashadmin{
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_sp_dashadmin > button{
+    padding: 40px;
+    height: 120px;
+    width: 162px;
+    border-radius: 6px;
+}
+
+#bt1_sp{
+    margin-right: 50px;
+}
+
+#bt2_sp{
+    margin-right: 50px;
+}
+
+
+.div_if_dashadmin{
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_if_dashadmin > button{
+    padding: 40px;
+    height: 120px;
+    width: 162px;
+    border-radius: 6px;
+    
+}
+
+#bt1_if{
+    margin-right: 50px;
+}
+
+#bt2_if{
+    margin-right: 50px;
+}

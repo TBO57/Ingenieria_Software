@@ -1,0 +1,15 @@
+
+.div_main{
+    /* border-color: black; */
+    border: solid 1px #000000;
+    display: flex;
+    justify-content: center;
+    flex-direction: columm;
+    align-items: center;
+    text-align: center;
+    margin: 60px auto;
+    width: 600px;
+    height: 500px;
+    border-radius: 3px;
+    
+}
