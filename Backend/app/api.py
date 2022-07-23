@@ -200,6 +200,26 @@ def get_operador(id):
     
     return operador_schema.jsonify(operador)
 
+#(Get) un operador Email
+@app.route('/operadoremail/<usuario>', methods=['GET'])
+def get_operadoremail(usuario):
+    operador = db.session.query(Operador).filter(Operador.Usuario == usuario).first()
+    
+    val = "";
+                   #None = null
+    if operador != None:
+        print("funcionando")
+        val = True;
+        print(val)
+    else:
+        print("no joda")
+        val = False;
+        print(val)
+    
+
+    return operador_schema.jsonify(operador)
+    # return jsonify(val)
+
 #(Post) operador
 @app.route('/addoperador', methods=['POST'])
 def add_operador():
@@ -623,6 +643,6 @@ def index():
     return jsonify({ 'Mensaje' : 'Bienvenido :)'})
 
 if __name__=="__main__":
-    app.run(debug=True)
-          # port = 5000,
+    app.run(port = 7000, debug=True)
+          # port = 6000,
   
