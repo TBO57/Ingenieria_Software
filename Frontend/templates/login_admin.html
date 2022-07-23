@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=icon href="{{ url_for('static', filename = 'img/logo_unicor.svg')}}" />
+    <title>Login</title>
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/inicio.css') }}">
+</head>
+
+<body>
+
+    <div class="login-box">
+        <img src="{{ url_for('static', filename = 'img/logo_unicor.png')}}" class="avatar" alt="Avatar Image">
+        <p>Iniciar sesión</p>
+        <form>
+
+            <!-- USERNAME INPUT -->
+            <label for="username">Usuario</label>
+            <div class="Uinput">
+                <input type="text" placeholder="ingrese su usuario">
+            </div>
+
+            <!-- PASSWORD INPUT -->
+            <label for="password">Contraseña</label>
+            <div class="Pinput">
+                <input type="password" placeholder="ingrese su contraseña">
+            </div>
+
+            <!-- BUTTON -->
+            <input type="submit" value="INICIAR">
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>
