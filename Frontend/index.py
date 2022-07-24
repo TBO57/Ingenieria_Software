@@ -49,7 +49,7 @@ def login_admin():
                 session['name'] = person[3]
                 session['email'] = person[7]
                 
-                return render_template("/admin/inicioAdmin.html")
+                return redirect('/admin/inicio')
 
             else:
 
@@ -112,7 +112,7 @@ def login_operador():
                 session['name'] = person[3]
                 session['email'] = person[7]
 
-                return render_template("/op/inicioOperador.html")
+                return redirect('/operador/inicio')
 
             else:
 
