@@ -16,18 +16,26 @@
     <div class="div_main">
 
         <div className="modal-body p-5 pt-0">
+            <form action="http://127.0.0.1:7000/addtfs" method="POST" >
 
-        <p>N° de documento</p>
-        
-        <p> ------------------------------------------- </p>
+            <input type='text' className='form-control mb-3' name='Cuenta' placeholder='N° de documento'/>
+            
+            <p> ------------------------------------------- </p>
 
-        <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/>
+            <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
 
-        <input type='text' className='form-control mb-3' name='apellido' placeholder='Apellido' disabled/>
+            <input type='text' className='form-control mb-3' name='Fecha' placeholder='Apellido' />
 
-        <input type='number' className='form-control mb-3' name='almuerzos' placeholder='Numero de almuerzos' />
+            <input type='number' className='form-control mb-3' name='Valor' placeholder='Numero de almuerzos' />
 
-        </div>
+
+            <input type="submit" value="Enviar" class="btn btn-success px-5">
+
+            </form>
+
+            </div>
+             
+            
 
     </div>
 
