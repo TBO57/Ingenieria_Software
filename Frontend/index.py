@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_mysqldb import MySQL, MySQLdb
+# from flask_mysqldb import MySQL, MySQLdb
 
 # pip install Flask Flask-MySQLdb Flask_wtf Flask_login
 
@@ -10,7 +10,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'Prueba'
-db = MySQL(app)
+# db = MySQL(app)
 
 
 # rutas aplicacion
@@ -34,12 +34,12 @@ def login_operador():
         return render_template('login_operador.html')
 
 
-@app.route('/inicio_operador')
+@app.route('/operador/inicio')
 def inicio_operador():
     return render_template('inicio_operador.html')
 
 
-@app.route('/inicio_admin')
+@app.route('/admin/inicio')
 def inicio_admin():
     return render_template('inicio_admin.html')
 
