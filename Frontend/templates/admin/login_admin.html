@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -19,22 +19,24 @@
     <div class="login-box">
         <img src="{{ url_for('static', filename = 'img/logo_unicor.png')}}" class="avatar" alt="Avatar Image">
         <p>Iniciar sesión</p>
-        <form>
+        <form method = "POST">
 
             <!-- USERNAME INPUT -->
             <label for="username">Usuario</label>
             <div class="Uinput">
-                <input type="text" placeholder="ingrese su usuario">
+                <input type="text" name="username" placeholder="ingrese su usuario">
             </div>
 
             <!-- PASSWORD INPUT -->
             <label for="password">Contraseña</label>
             <div class="Pinput">
-                <input type="password" placeholder="ingrese su contraseña">
+                <input type="password" name="password" placeholder="ingrese su contraseña">
             </div>
 
             <!-- BUTTON -->
-            <input type="submit" value="INICIAR">
+            <a href="{{ url_for('inicio_admin')}}">
+                <input type="submit" value="INICIAR">
+            </a>
         </form>
     </div>
 
