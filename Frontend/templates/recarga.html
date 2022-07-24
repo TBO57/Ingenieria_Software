@@ -16,20 +16,23 @@
     <div class="box">
         <form action="">
             <div class="input1">
-                <input type='text'  name='Cuenta' placeholder='N° de documento'/>
-                <button type='submit' name=''>
-                    <i class="fa-solid fa-magnifying-glass fa-1x"></i>
-                </button>
-            </div>
-        </form>
-
-        <form action="http://127.0.0.1:7000/addtfs" method="POST" >
-            <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
-            <div class="input2">
+                <div class ="busqueda">
+                    <input type='text'  name='Cuenta' placeholder='N° de documento'/>
+                    <button type='submit' name=''>
+                        <i class="fa-solid fa-magnifying-glass fa-1x"></i>
+                    </button>
+                </div>
                 <div class = "disabled">
+                    <input type='text' placeholder='N° de Docuemento' disabled />
                     <input type='text' placeholder='Nombre' disabled/>
                     <input type='text' placeholder='Apellido' disabled/>
                 </div>
+            </div>
+        </form>
+
+        <form>
+            <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
+            <div class="input2">
                 <div class = "valor">
                     <label for="Valor">Ingrese el numero de almuerzos:</label>
                     <input type='number' name='Valor' placeholder='Numero de almuerzos' />
