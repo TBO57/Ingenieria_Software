@@ -24,12 +24,46 @@ def index():
 @app.route('/admin/login', methods=['GET', 'POST'])
 def login_admin():
     if request.method == 'POST':
-        print(request.form['username'])
-        print(request.form['password'])
-        return redirect('/admin/inicio')
+        usuario = request.form['username']
+        password = request.form['password']
+
+        # print(usuario)
+        # print(password)
+
+        cur = db.connection.cursor()
+        cur.execute("SELECT * FROM administrador WHERE Usuario='{0}'".format(usuario))
+        user = cur.fetchone()
+        cur.close()
+
+
+        if user != None:
+            if password == user[3]:
+
+                idb = user[1];
+
+                query = db.connection.cursor()
+                query.execute("SELECT * FROM persona WHERE Id='{0}'".format(idb))
+                person = query.fetchone()
+                query.close()
+
+                session['name'] = person[3]
+                session['email'] = person[7]
+
+                return render_template("/admin/inicioAdmin.html")
+
+            else:
+
+                print("Usuario o contraseña inválido")
+                return render_template("/admin/login_admin.html")
+
+        else:
+
+            print("Este Admin no está registrado")
+            
+            return render_template("/admin/login_admin.html")
     else:
+        
         return render_template('/admin/login_admin.html')
-    # return render_template('/admin/login_admin.html')
 
 
 @app.route('/admin/inicio')
