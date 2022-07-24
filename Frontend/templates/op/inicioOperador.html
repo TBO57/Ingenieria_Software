@@ -16,18 +16,24 @@
     <div class="div_sp_dashoperador" > 
     
         <a href="{{ url_for('registro_estudiante')}}">
-            <button type="button" class="btn btn-success" id="bt1_sp"> REGISTRAR</button>
+            <button type="button" class="btn btn-success" id="bt1_sp"> REGISTRAR ESTUDIANTE</button>
         </a>
 
+        <a href="{{ url_for('interfaz_recarga')}}">
         <button type="button" class="btn btn-success"> RECARGAR</button>
-        
+        </a>
 
     </div>
     
     <div class="div_if_dashoperador">  
     
-        <button type="button" class="btn btn-success" id="bt1_if"> ACTUALIZAR </button>
+        <a href="{{ url_for('actualizar_estudiante')}}">
+        <button type="button" class="btn btn-success" id="bt1_if"> ACTUALIZAR ESTUDIANTE </button>
+        </a>
+
+        <a href="{{ url_for('interfaz_reporte')}}">
         <button type="button" class="btn btn-success"> REPORTE DE FALLOS </button>
+        </a>
         
     </div>
 

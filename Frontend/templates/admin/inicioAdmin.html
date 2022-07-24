@@ -14,19 +14,30 @@
 <body>
     
     <div class="div_sp_dashadmin" > 
-    
-        <button type="button" class="btn btn-success" id="bt1_sp"> REGISTRAR OPERADOR </button>
-        <button type="button" class="btn btn-success" id="bt2_sp"> REPORTE DE VENTAS </button>
-        <button type="button" class="btn btn-success"> REGISTRAR ESTUDIANTE </button>
         
+        <a href="{{ url_for('registro_operador')}}">
+        <button type="button" class="btn btn-success" id="bt1_sp"> REGISTRAR OPERADOR </button>
+        </a>
+
+        <a href="{{ url_for('reporte_admin')}}">
+        <button type="button" class="btn btn-success" id="bt2_sp"> REPORTE DE VENTAS </button>
+        </a>
+        
+        <a href="{{ url_for('registro_estudiante')}}">
+        <button type="button" class="btn btn-success"> REGISTRAR ESTUDIANTE </button>
+        </a>
 
     </div>
     
     <div class="div_if_dashadmin">  
     
+        <a href="{{ url_for('interfaz_recarga')}}">
         <button type="button" class="btn btn-success" id="bt1_if"> RECARGAR </button>
-        <button type="button" class="btn btn-success" id="bt2_if"> ACTUALIZAR ESTUDIANTE </button>
+        </a>
         
+        <a href="{{ url_for('actualizar_estudiante')}}">
+        <button type="button" class="btn btn-success" id="bt2_if"> ACTUALIZAR ESTUDIANTE </button>
+        </a>
     </div>
 
     
