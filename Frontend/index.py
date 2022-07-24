@@ -48,7 +48,7 @@ def login_admin():
 
                 session['name'] = person[3]
                 session['email'] = person[7]
-
+                
                 return render_template("/admin/inicioAdmin.html")
 
             else:
