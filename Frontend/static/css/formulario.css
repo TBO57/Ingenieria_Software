@@ -18,23 +18,32 @@ body {
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
-    padding: 30px 0px;
+    padding: 0px 0px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 }
 
 .login-box p {
-    margin: 30px auto 15px;
-    padding: 0 0 20px;
+    margin: 0px;
+    padding: 0px;
     text-align: center;
     font-weight: 500;
     font-size: 26px;
     line-height: 58px;
     font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height:70%;
 }
 
 .input {
@@ -43,6 +52,16 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+.input input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: sans-serif;
 }
 
 .botones {
