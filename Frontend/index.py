@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL, MySQLdb
-import requests
+
 # pip install Flask Flask-MySQLdb Flask_wtf Flask_login
 
 
@@ -145,15 +145,15 @@ def interfaz_reporte():
 
 # ///////////////////////////////////////rutas comunes/////////////////////////////
 
-@app.route('/recarga')
+@app.route('/recarga', methods=['GET', 'POST'])
 def interfaz_recarga():
 
     if request.method == 'POST':
-        ndocumento = request.form['Cuenta']
-        # password = request.form['password']
-
-        print(ndocumento)
-        # print(password)
+        ndocumento = request.form['cuenta']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        valor = request.form['valor']
+        
 
         cur = db.connection.cursor()
         cur.execute("SELECT * FROM persona WHERE N_Documento='{0}'".format(ndocumento))
@@ -161,55 +161,58 @@ def interfaz_recarga():
         cur.close()
 
 
+        userdoc = str(user[1])
+
+
         if user != None:
-            # if password == user[3]:
+            if userdoc == ndocumento and user[3] == nombre and user[5] == apellido:
 
-                idb = user[1];
-                print(idb)
+                    pid = user[0]
+                    ndoc = user[1]
+                    nom = user[3]
+                    ape = user[5]   
 
-                # query = db.connection.cursor()
-                # query.execute("SELECT * FROM persona WHERE Id='{0}'".format(idb))
-                # person = query.fetchone()
-                # query.close()
+                    query1 = db.connection.cursor()
+                    query1.execute("SELECT * FROM estudiante WHERE Persona_Id='{0}'".format(pid))
+                    est = query1.fetchone()
+                    query1.close()
 
-                # session['name'] = person[3]
-                # session['email'] = person[7]
+                    idest = est[0]
 
-                url = 'http://127.0.0.1:5000/recarga'
+                    query2 = db.connection.cursor()
+                    query2.execute("SELECT * FROM cuenta WHERE Estudiante_idEstudiante='{0}'".format(idest))
+                    acc = query2.fetchone()
+                    query2.close()   
 
-                datos= {
-                    'Ndocumento' : user[1],
-                    'Nombre' : user[3],
-                    'Apellido' : user[5]
-                }
+                    saldo = int(acc[2])   
 
-                headers = {
-                    'User-Agent' : 'Mozilla/5.0',
-                    'Agent-Version' : '1.0.0'
+                    valortotal = int(valor) + saldo
 
-                }
+                    if valortotal < 50: 
 
-                requests.post(url, data=datos, headers=headers)
+                        insert = db.connection.cursor()
+                        insert.execute("UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
+                        db.connection.commit()
 
-                return render_template('recarga.html')
+                        return redirect('/recarga')
 
-            # else:
+                    else:
 
-            #     print("Usuario o contraseña inválido")
-            #     return render_template("/op/login_operador.html")
+                        return redirect('/recarga') 
+
+            else:
+
+                print("Los campos no coinciden")
+                return redirect("/recarga")
 
         else:
 
             print("Este Usuario no está registrado")
             
-            return render_template("/op/login_operador.html")
+            return render_template("recarga.html")
     else:
         
         return render_template('recarga.html')
-
-
-
-    return render_template('recarga.html')
 
 
 @app.route('/registro_estudiante', methods=['GET','POST'])

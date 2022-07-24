@@ -14,40 +14,45 @@
 <body>
 
     <div class="box">
-        <form method="POST" >
+        <!-- <form method="POST" >
             <div class="input1">
-                <input type='text'  name='Cuenta' placeholder='N° de documento'/>
+                <input type='text'  name='cuenta' placeholder='N° de documento'/>
                 <button type='submit' name=''>
                     <i class="fa-solid fa-magnifying-glass fa-1x"></i>
                 </button>
             </div>
-        </form>
+        </form> -->
 
         <form method="POST" >
             <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
             <div class="input2">
                 <div class = "disabled">
-                    <input type='text' placeholder='N° de Docuemento' disabled />
-                    <input type='text' placeholder='Nombre' disabled/>
-                    <input type='text' placeholder='Apellido' disabled/>
+                    <input type='text' name='cuenta' placeholder='N° de Documento'/>
+                    <input type='text' name='nombre' placeholder='Nombre' />
+                    <input type='text' name='apellido' placeholder='Apellido' />
+
+                    <div class="input2">
+                        <div class = "valor">
+                            <label for="Valor">Ingrese el numero de almuerzos:</label>
+                            <input type='number' name='valor' placeholder='Numero de almuerzos' />
+                        </div>
+
+                        <div class="botones">
+                            <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                            <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </form>
 
-        <form>
+        <!-- <form> -->
             <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
-            <div class="input2">
-                <div class = "valor">
-                    <label for="Valor">Ingrese el numero de almuerzos:</label>
-                    <input type='number' name='Valor' placeholder='Numero de almuerzos' />
-                </div>
-            </div>
+            
             <!-- BUTTONS -->
-            <div class="botones">
-                <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
-                <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
-            </div>
-        </form>
+            
+        <!-- </form> -->
     </div>
 
     <script src="https://kit.fontawesome.com/89054e0e8f.js" crossorigin="anonymous"></script>
