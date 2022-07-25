@@ -12,29 +12,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/dashOperador.css') }}">
 </head>
 <body>
-    
-    <div class="div_sp_dashoperador" > 
-    
-        <a href="{{ url_for('registro_estudiante')}}">
-            <button type="button" class="btn btn-success" id="bt1_sp"> REGISTRAR ESTUDIANTE</button>
-        </a>
-
-        <a href="{{ url_for('interfaz_recarga')}}">
-        <button type="button" class="btn btn-success"> RECARGAR</button>
-        </a>
-
-    </div>
-    
-    <div class="div_if_dashoperador">  
-    
-        <a href="{{ url_for('actualizar_estudiante')}}">
-        <button type="button" class="btn btn-success" id="bt1_if"> ACTUALIZAR ESTUDIANTE </button>
-        </a>
-
-        <a href="{{ url_for('interfaz_reporte')}}">
-        <button type="button" class="btn btn-success"> REPORTE DE FALLOS </button>
-        </a>
+    <div class = "x">
+        <div class="container">
+            <div class="botones" >
+                <a href="{{ url_for('registro_estudiante')}}">
+                    <button type="button"> REGISTRAR ESTUDIANTE</button>
+                </a>
         
+                <a href="{{ url_for('interfaz_recarga')}}">
+                <button type="button"> RECARGAR</button>
+                </a>
+            
+                <a href="{{ url_for('actualizar_estudiante')}}">
+                <button type="button"> ACTUALIZAR ESTUDIANTE </button>
+                </a>
+        
+                <a href="{{ url_for('interfaz_reporte')}}">
+                <button type="button"> REPORTE DE FALLOS </button>
+                </a>
+            </div>
+        </div>
     </div>
 
     

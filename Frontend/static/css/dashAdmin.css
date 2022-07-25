@@ -1,46 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.div_sp_dashadmin{
-    margin-top: 110px;
+body {
+    background-color: #F3F3F3;
+}
+
+.x {
+    width: 100vw;
+    height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.div_sp_dashadmin > button{
-    padding: 40px;
-    height: 120px;
-    width: 162px;
-    border-radius: 6px;
+.botones1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 150px;
+    margin-bottom: 100px;
 }
 
-#bt1_sp{
-    margin-right: 50px;
+.botones1 button {
+    width: 200px;
+    height: 200px;
+    color: #ffff;
+    border: 5px solid #F3F3F3;
+    background-color: #3B8354;
+    border-radius: 5px;
+    font-family: arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-#bt2_sp{
-    margin-right: 50px;
+.botones1 button:hover {
+    width: 200px;
+    height: 200px;
+    background-color: #285939;
+    color: 5px solid #285939;
+    border: none;
+    cursor: pointer;
 }
 
-
-.div_if_dashadmin{
-    margin-top: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.botones2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 150px;
 }
 
-.div_if_dashadmin > button{
-    padding: 40px;
-    height: 120px;
-    width: 162px;
-    border-radius: 6px;
-    
+.botones2 button {
+    width: 200px;
+    height: 200px;
+    color: #ffff;
+    border: 5px solid #F3F3F3;
+    background-color: #3B8354;
+    border-radius: 5px;
+    font-family: arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-#bt1_if{
-    margin-right: 50px;
-}
-
-#bt2_if{
-    margin-right: 50px;
+.botones2 button:hover {
+    width: 200px;
+    height: 200px;
+    background-color: #285939;
+    color: 5px solid #285939;
+    border: none;
+    cursor: pointer;
 }

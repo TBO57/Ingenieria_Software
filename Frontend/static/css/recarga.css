@@ -125,3 +125,16 @@ form {
     align-items: center;
     width: 100%;
 }
+
+.botones input {
+    width: 70%;
+}
+
+.botones a {
+    padding: 0px 10px;
+}
+
+.botones a input {
+    padding-left: 15px;
+    padding-right: 15px;
+}

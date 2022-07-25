@@ -102,7 +102,8 @@ def registro_operador():
             "INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)", (user, password))
 
         db.connection.commit()
-        flash("Operador registrado con exito")
+
+        flash("El registro del operador ha sido exitoso")
         print("Funcionando")
 
         return redirect('/admin/registro_operador')
@@ -163,12 +164,12 @@ def login_operador():
                 return redirect('/operador/inicio')
 
             else:
-                flash("Usuario o contraseña inválido")
+                flash("El usuario o contraseña es inválido")
                 print("Usuario o contraseña inválido")
                 return render_template("/op/login_operador.html")
 
         else:
-            flash("Este Usuario no está registrado")
+            flash("Este usuario no se encuentra registrado")
             print("Este Usuario no está registrado")
 
             return render_template("/op/login_operador.html")
@@ -193,6 +194,7 @@ def interfaz_reporte():
             "INSERT INTO reporte (descripcion) VALUES ('{0}')".format(body))
         db.connection.commit()
 
+        flash("Reporte enviado con exito")
         return redirect('/operador/reporte')
 
     else:
@@ -302,42 +304,36 @@ def registro_estudiante():
             "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
         db.connection.commit()
 
+        flash("El registro del estudiante ha sido exitoso")
         return redirect('/registro_estudiante')
 
 
-@app.route('/actualizar_estudiante', methods=['GET','POST'])
+@app.route('/actualizar_estudiante', methods=['GET', 'POST'])
 def actualizar_estudiante():
 
-        if request.method == 'GET':
-            return render_template('actualizar_estudiante.html')
+    if request.method == 'GET':
+        return render_template('actualizar_estudiante.html')
 
-        else:
-
-            tipo = request.form['tipodocumento']
-            numdoc = request.form['ndocumento']
-            nom1 = request.form['primernombre']
-            nom2 = request.form['segundonombre']
-            ape1 = request.form['primerapellido']
-            ape2 = request.form['segundoapellido']
-            numtel = request.form['ntelefono']
-            email = request.form['email']
-
-            cur = db.connection.cursor()
-            cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
-                        (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
-            db.connection.commit()
-
-            print("funcionando")
-
-            return redirect('/actualizar_estudiante')
-
-
-@app.route('/buscar_estudiante', methods=['GET', 'POST'])
-def buscar_estudiante():
-    if request.method == 'POST':
-        return redirect('/actualizar_estudiante')
     else:
-        return render_template("buscar.html")
+
+        tipo = request.form['tipodocumento']
+        numdoc = request.form['ndocumento']
+        nom1 = request.form['primernombre']
+        nom2 = request.form['segundonombre']
+        ape1 = request.form['primerapellido']
+        ape2 = request.form['segundoapellido']
+        numtel = request.form['ntelefono']
+        email = request.form['email']
+
+        cur = db.connection.cursor()
+        cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
+                    (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
+        db.connection.commit()
+
+        print("funcionando")
+
+        flash("Actualizado realizada con éxito")
+        return redirect('/actualizar_estudiante')
 
 
 # ///////////////////////////////////////rutas comunes/////////////////////////////

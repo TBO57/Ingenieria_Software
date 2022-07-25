@@ -14,22 +14,17 @@
 
 </head>
 <body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
     <div class="box">
-        <p>Ingrese los datos del estudiante</p>
+        <p>Ingrese los datos ha actualizar del estudiante</p>
         <form method="POST">
             <!-- INPUT -->
             <div class="contenedor-input">
-                <div class="input1">
-                    <input type="text" name="tipodocumento" placeholder="Tipo de documento" disabled>
-                    <input type="number" name="ndocumento" placeholder="N° de documento" disabled>
-                    <input type="text" name="primernombre" placeholder="Primer nombre" disabled>
-                    <input type="text" name="segundonombre" placeholder="Segundo nombre" disabled>
-                    <input type="text" name="primerapellido" placeholder="Primer apellido" disabled>
-                    <input type="text" name="segundoapellido" placeholder="Segundo apellido" disabled>
-                    <input type="number" name="ntelefono" placeholder="N° Teléfono" disabled>
-                    <input type="email" name="email" placeholder="Correo electrónico" disabled>
-                </div>
-    
                 <div class="input2">
                     <input type="text" name="tipodocumento" placeholder="Tipo de documento" required>
                     <input type="number" name="ndocumento" placeholder="N° de documento" required>
@@ -43,8 +38,10 @@
             </div>
             <!-- BUTTONS -->
             <div class="botones">
-                <input type="submit" class="btn btn-danger mx-5 my-4" value="CANCELAR">
-                <input type="submit" class="btn btn-success mx-5 my-4" value="ACTUALIZAR">
+                <a href="{{ url_for('inicio_operador')}}">
+                    <input type="button" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                </a>
+                <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
             </div>
         </form>
     </div>

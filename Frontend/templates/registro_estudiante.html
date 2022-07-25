@@ -14,6 +14,12 @@
 
 </head>
 <body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
     <div class="box">
         <p>Ingrese los datos del estudiante</p>
         <form method = "POST">
@@ -30,7 +36,9 @@
             </div>
             <!-- BUTTONS -->
             <div class = "botones">
-                <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                <a href="{{ url_for('inicio_operador')}}">
+                    <input type="button" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                </a>
                 <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
             </div>
             
