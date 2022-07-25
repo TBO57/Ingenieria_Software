@@ -12,26 +12,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/recarga.css') }}">
 </head>
 <body>
-
     <div class="box">
         <form method="POST" >
             <div class="input">
-                    <div class = "datos">
-                        <label for="datos">Ingrese los datos del estudiante:</label>
-                        <input type='text' name='cuenta' placeholder='N° de Documento'/>
-                        <input type='text' name='nombre' placeholder='Primer nombre' />
-                        <input type='text' name='apellido' placeholder='Primer apellido' />
-                    </div>
+                <div class = "datos">
+                    <label for="datos">Ingrese los datos del estudiante:</label>
+                    <input type='text' name='cuenta' placeholder='N° de Documento'/>
+                    <input type='text' name='nombre' placeholder='Primer nombre' />
+                    <input type='text' name='apellido' placeholder='Primer apellido' />
+                </div>
 
-                    <div class = "valor">
-                        <label for="Valor">Ingrese el numero de almuerzos:</label>
-                        <input type='number' name='valor' placeholder='Numero de almuerzos' />
-                    </div>
+                <div class = "valor">
+                    <label for="Valor">Ingrese el numero de almuerzos:</label>
+                    <input type='number' name='valor' placeholder='Numero de almuerzos' />
+                </div>
 
-                    <div class="botones">
-                        <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
-                        <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
-                    </div>
+                <div class="botones">
+                    <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                    <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
+                </div>
             </div>
         </form>
     </div>
