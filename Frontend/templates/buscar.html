@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=icon href="{{ url_for('static', filename = 'img/logo_unicor.svg')}}" />
+    <title>Aplicativo</title>
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/buscar.css') }}">
+
+</head>
+
+<body>
+    <div class="x">
+        <div class="box">
+            <div class = "titulo">
+                <p>INGRESE EL NÚMERO DE DOCUMENTO ESTUDIANTE</p>
+            </div>
+            <div class="formulario">
+                <form method="post">
+                    <div class = "busqueda">
+                        <input type="text" placeholder="N° de documento">
+                        <!-- <button type="submit" class="" href="{{ url_for('actualizar_estudiante')}}">
+                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                        </button> -->
+                        <a href="{{ url_for('actualizar_estudiante')}}">
+                            <input type="submit" value="INICIAR">
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/89054e0e8f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>

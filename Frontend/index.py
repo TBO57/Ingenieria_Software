@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, flash, request, redirect, url_for, session
 from flask_mysqldb import MySQL, MySQLdb
 
 # pip install Flask Flask-MySQLdb Flask_wtf Flask_login
@@ -31,38 +31,40 @@ def login_admin():
         # print(password)f
 
         cur = db.connection.cursor()
-        cur.execute("SELECT * FROM administrador WHERE Usuario='{0}'".format(usuario))
+        cur.execute(
+            "SELECT * FROM administrador WHERE Usuario='{0}'".format(usuario))
         user = cur.fetchone()
         cur.close()
-
 
         if user != None:
             if password == user[3]:
 
-                idb = user[1];
+                idb = user[1]
 
                 query = db.connection.cursor()
-                query.execute("SELECT * FROM persona WHERE Id='{0}'".format(idb))
+                query.execute(
+                    "SELECT * FROM persona WHERE Id='{0}'".format(idb))
                 person = query.fetchone()
                 query.close()
 
                 session['name'] = person[3]
                 session['email'] = person[7]
-                
+
                 return redirect('/admin/inicio')
 
             else:
 
+                flash("Usuario o contraseña inválido")
                 print("Usuario o contraseña inválido")
                 return render_template("/admin/login_admin.html")
 
         else:
 
             print("Este Admin no está registrado")
-            
+            flash("Este Admin no está registrado")
             return render_template("/admin/login_admin.html")
     else:
-        
+
         return render_template('/admin/login_admin.html')
 
 
@@ -91,22 +93,24 @@ def registro_operador():
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)", (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                    (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
         db.connection.commit()
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)",(user,password))
- 
+        cur.execute(
+            "INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)", (user, password))
+
         db.connection.commit()
         print("Funcionando")
-        
+
         return redirect('/admin/inicio')
-    
 
 
 @app.route('/admin/reporte')
 def reporte_admin():
     return render_template('/admin/reporte_ventas.html')
+
 
 @app.route('/admin/reporte/informe')
 def reporte1():
@@ -126,18 +130,19 @@ def login_operador():
         # print(password)
 
         cur = db.connection.cursor()
-        cur.execute("SELECT * FROM operador WHERE Usuario='{0}'".format(usuario))
+        cur.execute(
+            "SELECT * FROM operador WHERE Usuario='{0}'".format(usuario))
         user = cur.fetchone()
         cur.close()
-
 
         if user != None:
             if password == user[3]:
 
-                idb = user[1];
+                idb = user[1]
 
                 query = db.connection.cursor()
-                query.execute("SELECT * FROM persona WHERE Id='{0}'".format(idb))
+                query.execute(
+                    "SELECT * FROM persona WHERE Id='{0}'".format(idb))
                 person = query.fetchone()
                 query.close()
 
@@ -154,10 +159,10 @@ def login_operador():
         else:
 
             print("Este Usuario no está registrado")
-            
+
             return render_template("/op/login_operador.html")
     else:
-        
+
         return render_template('/op/login_operador.html')
 
 
@@ -171,16 +176,17 @@ def interfaz_reporte():
 
     if request.method == 'POST':
         body = request.form['fallo']
-    
+
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO reporte (descripcion) VALUES ('{0}')".format(body))
+        cur.execute(
+            "INSERT INTO reporte (descripcion) VALUES ('{0}')".format(body))
         db.connection.commit()
 
         return redirect('/operador/inicio')
 
     else:
 
-            return render_template('/op/reporteFallos.html')
+        return render_template('/op/reporteFallos.html')
 
 
 # ///////////////////////////////////////rutas comunes/////////////////////////////
@@ -193,52 +199,53 @@ def interfaz_recarga():
         nombre = request.form['nombre']
         apellido = request.form['apellido']
         valor = request.form['valor']
-        
 
         cur = db.connection.cursor()
-        cur.execute("SELECT * FROM persona WHERE N_Documento='{0}'".format(ndocumento))
+        cur.execute(
+            "SELECT * FROM persona WHERE N_Documento='{0}'".format(ndocumento))
         user = cur.fetchone()
         cur.close()
 
-
         userdoc = str(user[1])
-
 
         if user != None:
             if userdoc == ndocumento and user[3] == nombre and user[5] == apellido:
 
-                    pid = user[0]
-                    ndoc = user[1]
-                    nom = user[3]
-                    ape = user[5]   
+                pid = user[0]
+                ndoc = user[1]
+                nom = user[3]
+                ape = user[5]
 
-                    query1 = db.connection.cursor()
-                    query1.execute("SELECT * FROM estudiante WHERE Persona_Id='{0}'".format(pid))
-                    est = query1.fetchone()
-                    query1.close()
+                query1 = db.connection.cursor()
+                query1.execute(
+                    "SELECT * FROM estudiante WHERE Persona_Id='{0}'".format(pid))
+                est = query1.fetchone()
+                query1.close()
 
-                    idest = est[0]
+                idest = est[0]
 
-                    query2 = db.connection.cursor()
-                    query2.execute("SELECT * FROM cuenta WHERE Estudiante_idEstudiante='{0}'".format(idest))
-                    acc = query2.fetchone()
-                    query2.close()   
+                query2 = db.connection.cursor()
+                query2.execute(
+                    "SELECT * FROM cuenta WHERE Estudiante_idEstudiante='{0}'".format(idest))
+                acc = query2.fetchone()
+                query2.close()
 
-                    saldo = int(acc[2])   
+                saldo = int(acc[2])
 
-                    valortotal = int(valor) + saldo
+                valortotal = int(valor) + saldo
 
-                    if valortotal < 50: 
+                if valortotal < 50:
 
-                        insert = db.connection.cursor()
-                        insert.execute("UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
-                        db.connection.commit()
+                    insert = db.connection.cursor()
+                    insert.execute(
+                        "UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
+                    db.connection.commit()
 
-                        return redirect('/recarga')
+                    return redirect('/recarga')
 
-                    else:
+                else:
 
-                        return redirect('/recarga') 
+                    return redirect('/recarga')
 
             else:
 
@@ -248,14 +255,14 @@ def interfaz_recarga():
         else:
 
             print("Este Usuario no está registrado")
-            
+
             return render_template("recarga.html")
     else:
-        
+
         return render_template('recarga.html')
 
 
-@app.route('/registro_estudiante', methods=['GET','POST'])
+@app.route('/registro_estudiante', methods=['GET', 'POST'])
 def registro_estudiante():
 
     if request.method == 'GET':
@@ -273,14 +280,15 @@ def registro_estudiante():
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)", (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                    (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
         db.connection.commit()
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
+        cur.execute(
+            "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
         db.connection.commit()
-        
-        
+
         return redirect('/operador/inicio')
 
 
@@ -288,10 +296,17 @@ def registro_estudiante():
 def actualizar_estudiante():
     return render_template('actualizar_estudiante.html')
 
+
+@app.route('/buscar_estudiante', methods=['GET', 'POST'])
+def buscar_estudiante():
+    if request.method == 'POST':
+        print("entro")
+        return redirect('/actualizar_estudiante')
+    else:
+        return render_template("buscar.html")
+
+
 # ///////////////////////////////////////rutas comunes/////////////////////////////
-
-
-
 
 if __name__ == '__main__':
     app.secret_key = "thisappissafe"

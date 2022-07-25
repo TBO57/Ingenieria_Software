@@ -18,20 +18,33 @@
         <p>Ingrese los datos del estudiante</p>
         <form method="POST">
             <!-- INPUT -->
-            <div class="input">
-                <input type="text" name="tipodocumento" placeholder="Tipo de documento">
-                <input type="number" name="ndocumento" placeholder="N° de documento">
-                <input type="text" name="primernombre" placeholder="Primer nombre">
-                <input type="text" name="segundonombre" placeholder="Segundo nombre">
-                <input type="text" name="primerapellido" placeholder="Primer apellido">
-                <input type="text" name="segundoapellido" placeholder="Segundo apellido">
-                <input type="number" name="ntelefono" placeholder="N° Teléfono">
-                <input type="email" name="email" placeholder="Correo electrónico">
+            <div class="contenedor-input">
+                <div class="input1">
+                    <input type="text" name="tipodocumento" placeholder="Tipo de documento" disabled>
+                    <input type="number" name="ndocumento" placeholder="N° de documento" disabled>
+                    <input type="text" name="primernombre" placeholder="Primer nombre" disabled>
+                    <input type="text" name="segundonombre" placeholder="Segundo nombre" disabled>
+                    <input type="text" name="primerapellido" placeholder="Primer apellido" disabled>
+                    <input type="text" name="segundoapellido" placeholder="Segundo apellido" disabled>
+                    <input type="number" name="ntelefono" placeholder="N° Teléfono" disabled>
+                    <input type="email" name="email" placeholder="Correo electrónico" disabled>
+                </div>
+    
+                <div class="input2">
+                    <input type="text" name="tipodocumento" placeholder="Tipo de documento">
+                    <input type="number" name="ndocumento" placeholder="N° de documento">
+                    <input type="text" name="primernombre" placeholder="Primer nombre">
+                    <input type="text" name="segundonombre" placeholder="Segundo nombre">
+                    <input type="text" name="primerapellido" placeholder="Primer apellido">
+                    <input type="text" name="segundoapellido" placeholder="Segundo apellido">
+                    <input type="number" name="ntelefono" placeholder="N° Teléfono">
+                    <input type="email" name="email" placeholder="Correo electrónico">
+                </div>
             </div>
             <!-- BUTTONS -->
             <div class="botones">
-                <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
-                <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
+                <input type="submit" class="btn btn-danger mx-5 my-4" value="CANCELAR">
+                <input type="submit" class="btn btn-success mx-5 my-4" value="ACTUALIZAR">
             </div>
         </form>
     </div>
