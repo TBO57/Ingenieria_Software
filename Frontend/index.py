@@ -73,7 +73,35 @@ def inicio_admin():
 
 @app.route('/admin/registro_operador', methods=['GET', 'POST'])
 def registro_operador():
-    return render_template('/admin/registro_operador.html')
+
+    if request.method == 'GET':
+        return render_template('/admin/registro_operador.html')
+
+    else:
+
+        tipo = request.form['tipodocumento']
+        numdoc = request.form['ndocumento']
+        nom1 = request.form['primernombre']
+        nom2 = request.form['segundonombre']
+        ape1 = request.form['primerapellido']
+        ape2 = request.form['segundoapellido']
+        user = request.form['username']
+        password = request.form['password']
+        numtel = request.form['ntelefono']
+        email = request.form['email']
+
+        cur = db.connection.cursor()
+        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)", (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+        db.connection.commit()
+
+        cur = db.connection.cursor()
+        cur.execute("INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)",(user,password))
+        # cur.execute("")
+        db.connection.commit()
+        print("Funcionando")
+        
+        return redirect('/admin/inicio')
+    
 
 
 @app.route('/admin/reporte')
@@ -145,13 +173,78 @@ def interfaz_reporte():
 # @app.route('/admin/inicio')
 # def inicio_admin():
 #     return render_template('/admin/inicioAdmin.html')
-
+#
 
 # ///////////////////////////////////////rutas comunes/////////////////////////////
 
-@app.route('/recarga')
+@app.route('/recarga', methods=['GET', 'POST'])
 def interfaz_recarga():
-    return render_template('recarga.html')
+
+    if request.method == 'POST':
+        ndocumento = request.form['cuenta']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        valor = request.form['valor']
+        
+
+        cur = db.connection.cursor()
+        cur.execute("SELECT * FROM persona WHERE N_Documento='{0}'".format(ndocumento))
+        user = cur.fetchone()
+        cur.close()
+
+
+        userdoc = str(user[1])
+
+
+        if user != None:
+            if userdoc == ndocumento and user[3] == nombre and user[5] == apellido:
+
+                    pid = user[0]
+                    ndoc = user[1]
+                    nom = user[3]
+                    ape = user[5]   
+
+                    query1 = db.connection.cursor()
+                    query1.execute("SELECT * FROM estudiante WHERE Persona_Id='{0}'".format(pid))
+                    est = query1.fetchone()
+                    query1.close()
+
+                    idest = est[0]
+
+                    query2 = db.connection.cursor()
+                    query2.execute("SELECT * FROM cuenta WHERE Estudiante_idEstudiante='{0}'".format(idest))
+                    acc = query2.fetchone()
+                    query2.close()   
+
+                    saldo = int(acc[2])   
+
+                    valortotal = int(valor) + saldo
+
+                    if valortotal < 50: 
+
+                        insert = db.connection.cursor()
+                        insert.execute("UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
+                        db.connection.commit()
+
+                        return redirect('/recarga')
+
+                    else:
+
+                        return redirect('/recarga') 
+
+            else:
+
+                print("Los campos no coinciden")
+                return redirect("/recarga")
+
+        else:
+
+            print("Este Usuario no está registrado")
+            
+            return render_template("recarga.html")
+    else:
+        
+        return render_template('recarga.html')
 
 
 @app.route('/registro_estudiante', methods=['GET','POST'])
@@ -178,7 +271,7 @@ def registro_estudiante():
         cur = db.connection.cursor()
         cur.execute("INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
         db.connection.commit()
-        print("Funcionando")
+        
         
         return redirect('/operador/inicio')
 

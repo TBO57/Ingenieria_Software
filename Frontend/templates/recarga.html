@@ -12,36 +12,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/recarga.css') }}">
 </head>
 <body>
-
     <div class="box">
-        <form action="">
-            <div class="input1">
-                <div class ="busqueda">
-                    <input type='text'  name='Cuenta' placeholder='N° de documento'/>
-                    <button type='submit' name=''>
-                        <i class="fa-solid fa-magnifying-glass fa-1x"></i>
-                    </button>
+        <form method="POST" >
+            <div class="input">
+                <div class = "datos">
+                    <label for="datos">Ingrese los datos del estudiante:</label>
+                    <input type='text' name='cuenta' placeholder='N° de Documento'/>
+                    <input type='text' name='nombre' placeholder='Primer nombre' />
+                    <input type='text' name='apellido' placeholder='Primer apellido' />
                 </div>
-                <div class = "disabled">
-                    <input type='text' placeholder='N° de Docuemento' disabled />
-                    <input type='text' placeholder='Nombre' disabled/>
-                    <input type='text' placeholder='Apellido' disabled/>
-                </div>
-            </div>
-        </form>
 
-        <form>
-            <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
-            <div class="input2">
                 <div class = "valor">
                     <label for="Valor">Ingrese el numero de almuerzos:</label>
-                    <input type='number' name='Valor' placeholder='Numero de almuerzos' />
+                    <input type='number' name='valor' placeholder='Numero de almuerzos' />
                 </div>
-            </div>
-            <!-- BUTTONS -->
-            <div class="botones">
-                <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
-                <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
+
+                <div class="botones">
+                    <input type="submit" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                    <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
+                </div>
             </div>
         </form>
     </div>
