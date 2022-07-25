@@ -73,7 +73,35 @@ def inicio_admin():
 
 @app.route('/admin/registro_operador', methods=['GET', 'POST'])
 def registro_operador():
-    return render_template('/admin/registro_operador.html')
+
+    if request.method == 'GET':
+        return render_template('/admin/registro_operador.html')
+
+    else:
+
+        tipo = request.form['tipodocumento']
+        numdoc = request.form['ndocumento']
+        nom1 = request.form['primernombre']
+        nom2 = request.form['segundonombre']
+        ape1 = request.form['primerapellido']
+        ape2 = request.form['segundoapellido']
+        user = request.form['username']
+        password = request.form['password']
+        numtel = request.form['ntelefono']
+        email = request.form['email']
+
+        cur = db.connection.cursor()
+        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)", (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+        db.connection.commit()
+
+        cur = db.connection.cursor()
+        cur.execute("INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)",(user,password))
+        # cur.execute("")
+        db.connection.commit()
+        print("Funcionando")
+        
+        return redirect('/admin/inicio')
+    
 
 
 @app.route('/admin/reporte')
@@ -239,7 +267,7 @@ def registro_estudiante():
         cur = db.connection.cursor()
         cur.execute("INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
         db.connection.commit()
-        print("Funcionando")
+        
         
         return redirect('/operador/inicio')
 
