@@ -80,6 +80,10 @@ def registro_operador():
 def reporte_admin():
     return render_template('/admin/reporte_ventas.html')
 
+@app.route('/admin/reporte/informe')
+def reporte1():
+    return render_template('/admin/reporte1.html')
+
 # ///////////////////////////////////////rutas admin/////////////////////////////
 
 
