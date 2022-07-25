@@ -259,7 +259,10 @@ def reporte2():
 def reporte3():
     return render_template('/admin/reporte3.html')
 
-# ///////////////////////////////////////rutas admin/////////////////////////////
+# ///////////////////////////////////////rutas admin////////////////////////////////
+
+
+#-----------------------------------------------------------------------------------
 
 
 # ///////////////////////////////////////rutas operador/////////////////////////////
@@ -459,43 +462,6 @@ def interfaz_reporte():
     else:
 
         return render_template('/op/reporteFallos.html')
-
-
-# ///////////////////////////////////////rutas comunes/////////////////////////////
-
-@app.route('/registro_estudiante', methods=['GET', 'POST'])
-def registro_estudiante():
-
-    if request.method == 'GET':
-        return render_template("registro_estudiante.html")
-
-    else:
-
-        tipo = request.form['tipodocumento']
-        nom1 = request.form['primernombre']
-        numdoc = request.form['ndocumento']
-        nom2 = request.form['segundonombre']
-        ape1 = request.form['primerapellido']
-        ape2 = request.form['segundoapellido']
-        numtel = request.form['ntelefono']
-        email = request.form['email']
-
-        cur = db.connection.cursor()
-        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
-        db.connection.commit()
-
-        cur = db.connection.cursor()
-        cur.execute(
-            "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
-        db.connection.commit()
-
-        flash("El registro del estudiante ha sido exitoso")
-        return redirect('/registro_estudiante')
-
-
-
-# ///////////////////////////////////////rutas comunes/////////////////////////////
 
 if __name__ == '__main__':
     app.secret_key = "thisappissafe"
