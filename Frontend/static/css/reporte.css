@@ -83,10 +83,6 @@ form {
     display: block;
 }
 
-.fallo input {
-    padding-bottom: 80%;
-}
-
 .botones {
     display: flex;
     flex-direction: row;
