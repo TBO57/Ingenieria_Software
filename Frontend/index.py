@@ -113,17 +113,17 @@ def reporte_admin():
     return render_template('/admin/reporte_ventas.html')
 
 
-@app.route('/admin/reporte/informe')
+@app.route('/admin/reporte/informe?')
 def reporte1():
     return render_template('/admin/reporte1.html')
 
 
-@app.route('/admin/reporte/informe2')
+@app.route('/admin/reporte/informe.')
 def reporte2():
     return render_template('/admin/reporte2.html')
 
 
-@app.route('/admin/reporte/informe3')
+@app.route('/admin/reporte/informe')
 def reporte3():
     return render_template('/admin/reporte3.html')
 
@@ -193,7 +193,7 @@ def interfaz_reporte():
             "INSERT INTO reporte (descripcion) VALUES ('{0}')".format(body))
         db.connection.commit()
 
-        return redirect('/operador/inicio')
+        return redirect('/operador/reporte')
 
     else:
 
@@ -252,10 +252,12 @@ def interfaz_recarga():
                         "UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
                     db.connection.commit()
 
+                    flash("Recarga realizada con éxito")
                     return redirect('/recarga')
 
                 else:
 
+                    flash("Esta recarga sobrepasa el limite de almuerzos")
                     return redirect('/recarga')
 
             else:
@@ -300,7 +302,7 @@ def registro_estudiante():
             "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
         db.connection.commit()
 
-        return redirect('/operador/inicio')
+        return redirect('/registro_estudiante')
 
 
 @app.route('/actualizar_estudiante', methods=['GET','POST'])
