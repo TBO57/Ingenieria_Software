@@ -102,9 +102,10 @@ def registro_operador():
             "INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)", (user, password))
 
         db.connection.commit()
+        flash("Operador registrado con exito")
         print("Funcionando")
 
-        return redirect('/admin/inicio')
+        return redirect('/admin/registro_operador')
 
 
 @app.route('/admin/reporte')
@@ -116,9 +117,11 @@ def reporte_admin():
 def reporte1():
     return render_template('/admin/reporte1.html')
 
+
 @app.route('/admin/reporte/informe2')
 def reporte2():
     return render_template('/admin/reporte2.html')
+
 
 @app.route('/admin/reporte/informe3')
 def reporte3():
@@ -160,12 +163,12 @@ def login_operador():
                 return redirect('/operador/inicio')
 
             else:
-
+                flash("Usuario o contraseña inválido")
                 print("Usuario o contraseña inválido")
                 return render_template("/op/login_operador.html")
 
         else:
-
+            flash("Este Usuario no está registrado")
             print("Este Usuario no está registrado")
 
             return render_template("/op/login_operador.html")
@@ -256,12 +259,12 @@ def interfaz_recarga():
                     return redirect('/recarga')
 
             else:
-
+                flash("Los datos no coinciden")
                 print("Los campos no coinciden")
                 return redirect("/recarga")
 
         else:
-
+            flash("El Usuario no está registrado")
             print("Este Usuario no está registrado")
 
             return render_template("recarga.html")

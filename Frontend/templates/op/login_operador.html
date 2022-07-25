@@ -19,6 +19,12 @@
         <p>Iniciar sesión</p>
         <form  method = "POST"> <!-- action = "/login_operador" -->
             <!-- USERNAME INPUT -->
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger alert-dismissible show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
             <label for="username">Usuario</label>
             <div class="Uinput">
                 <input type="text" id="username" name="username" placeholder="ingrese su usuario">

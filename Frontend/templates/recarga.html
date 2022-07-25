@@ -17,6 +17,12 @@
             <div class="input">
                 <div class = "datos">
                     <label for="datos">Ingrese los datos del estudiante:</label>
+                    {% for message in get_flashed_messages() %}
+                    <div class="alert alert-danger alert-dismissible show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
                     <input type='text' name='cuenta' placeholder='N° de Documento'/>
                     <input type='text' name='nombre' placeholder='Primer nombre' />
                     <input type='text' name='apellido' placeholder='Primer apellido' />
