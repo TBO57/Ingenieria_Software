@@ -300,15 +300,36 @@ def registro_estudiante():
         return redirect('/operador/inicio')
 
 
-@app.route('/actualizar_estudiante')
+@app.route('/actualizar_estudiante', methods=['GET','POST'])
 def actualizar_estudiante():
-    return render_template('actualizar_estudiante.html')
+
+        if request.method == 'GET':
+            return render_template('actualizar_estudiante.html')
+
+        else:
+
+            tipo = request.form['tipodocumento']
+            numdoc = request.form['ndocumento']
+            nom1 = request.form['primernombre']
+            nom2 = request.form['segundonombre']
+            ape1 = request.form['primerapellido']
+            ape2 = request.form['segundoapellido']
+            numtel = request.form['ntelefono']
+            email = request.form['email']
+
+            cur = db.connection.cursor()
+            cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
+                        (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
+            db.connection.commit()
+
+            print("funcionando")
+
+            return redirect('/actualizar_estudiante')
 
 
 @app.route('/buscar_estudiante', methods=['GET', 'POST'])
 def buscar_estudiante():
     if request.method == 'POST':
-        print("entro")
         return redirect('/actualizar_estudiante')
     else:
         return render_template("buscar.html")
