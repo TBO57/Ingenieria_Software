@@ -166,14 +166,22 @@ def inicio_operador():
     return render_template('/op/inicioOperador.html')
 
 
-@app.route('/operador/reporte')
+@app.route('/operador/reporte', methods=['GET', 'POST'])
 def interfaz_reporte():
-    return render_template('/op/reporteFallos.html')
 
-# @app.route('/admin/inicio')
-# def inicio_admin():
-#     return render_template('/admin/inicioAdmin.html')
-#
+    if request.method == 'POST':
+        body = request.form['fallo']
+    
+        cur = db.connection.cursor()
+        cur.execute("INSERT INTO reporte (descripcion) VALUES ('{0}')".format(body))
+        db.connection.commit()
+
+        return redirect('/operador/inicio')
+
+    else:
+
+            return render_template('/op/reporteFallos.html')
+
 
 # ///////////////////////////////////////rutas comunes/////////////////////////////
 
