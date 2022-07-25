@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=icon href="{{ url_for('static', filename = 'img/logo_unicor.svg')}}" />
+    <title>Registro de Estudiante</title>
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/registro_estudiante.css') }}">
+
+</head>
+<body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <div class="box">
+        <p>Ingrese los datos del estudiante</p>
+        <form method = "POST">
+            <!-- INPUT -->
+            <div class="input">
+                <input type="text" name="tipodocumento" placeholder="Tipo de documento" required>
+                <input type="number" name="ndocumento" placeholder="N° de documento" required>
+                <input type="text" name="primernombre" placeholder="Primer nombre" required>
+                <input type="text" name="segundonombre" placeholder="Segundo nombre" >
+                <input type="text" name="primerapellido" placeholder="Primer apellido" required>
+                <input type="text" name="segundoapellido" placeholder="Segundo apellido">
+                <input type="number" name="ntelefono" placeholder="N° Teléfono" required>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+            </div>
+            <!-- BUTTONS -->
+            <div class = "botones">
+                <a href="{{ url_for('inicio_operador')}}">
+                    <input type="button" class="btn btn-danger mx-4 my-4" value="CANCELAR">
+                </a>
+                <input type="submit" class="btn btn-success mx-4 my-4" value="REGISTRAR">
+            </div>
+            
+        </form>	
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>
