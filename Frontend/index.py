@@ -96,7 +96,7 @@ def registro_operador():
 
         cur = db.connection.cursor()
         cur.execute("INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)",(user,password))
-        # cur.execute("")
+ 
         db.connection.commit()
         print("Funcionando")
         
