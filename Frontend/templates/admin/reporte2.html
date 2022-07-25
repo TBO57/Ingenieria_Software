@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = icon href = "{{ url_for('static', filename = 'img/logo_unicor.svg') }}"/>
+    <title>Reporte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/informe2.css') }}">
+</head>
+<body>
+<div class="big">
+    <div class="box">
+        <form>
+            <div class="input">
+                <h1>Reporte</h1>
+                <div class = "fallo">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>No. de Almuerzos Vendidos</th> 
+                            <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                            <td>86</td>
+                            <td>01/01/2022</td>
+                            </tr>
+                            <tr>
+                                <td>69</td>
+                                <td>02/01/2022</td>
+                            </tr>
+                            <tr>
+                            <td>102</td>
+                            <td>03/01/2022</td>
+                            </tr>
+                            <tr>
+                            <td>90</td>
+                            <td>04/01/2022</td>
+                            </tr>
+                            <tr>
+                            <td>123</td>
+                            <td>05/01/2022</td>
+                            </tr>
+                            <tr>
+                            <td>73</td>
+                            <td>06/01/2022</td>
+                            </tr>
+                            <tr>
+                            <td>90</td>
+                            <td>07/01/2022</td>
+                            </tr>
+                        </tbody>
+
+                      </table>
+                </div>
+            </div>  
+        </form>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

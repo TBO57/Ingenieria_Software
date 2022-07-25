@@ -116,6 +116,14 @@ def reporte_admin():
 def reporte1():
     return render_template('/admin/reporte1.html')
 
+@app.route('/admin/reporte/informe2')
+def reporte2():
+    return render_template('/admin/reporte2.html')
+
+@app.route('/admin/reporte/informe3')
+def reporte3():
+    return render_template('/admin/reporte3.html')
+
 # ///////////////////////////////////////rutas admin/////////////////////////////
 
 
