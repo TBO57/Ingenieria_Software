@@ -14,17 +14,21 @@
 
     <div class="box">
         <form>
-            <!-- <input type='text' className='form-control mb-3' name='nombre' placeholder='Nombre' disabled/> -->
-            <div class="input">
-                <div class = "fallo">
+            <div class="texto">
+                <div class = "selecc">
                     <label for="fallo">Seleccione el tiempo de reporte.</label>
                 </div>
-            </div>  
-            <!-- BUTTONS -->
+            </div>
             <div class="botones">
-                <input type="submit" class="btn btn-success mx-4 my-4" value="Un Día">
-                <input type="submit" class="btn btn-success mx-4 my-4" value="Una Semana">
-                <input type="submit" class="btn btn-success mx-4 my-4" value="Un Mes">
+                <a href="{{ url_for('reporte3')}}">
+                    <button type="button" class="btn btn-success mx-2 btn-lg" id="bt1_sp"> Un Día </button>
+                </a>
+                <a href="{{ url_for('reporte2')}}">
+                    <button type="button" class="btn btn-success mx-2 btn-lg" id="bt1_sp"> Una Semana </button>
+                </a>
+                <a href="{{ url_for('reporte1')}}">
+                    <button type="button" class="btn btn-success mx-2 btn-lg" id="bt1_sp"> Un Mes </button>
+                </a>
             </div>
         </form>
     </div>

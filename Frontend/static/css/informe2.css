@@ -11,13 +11,11 @@ body {
 
 .box {
     width: 500px;
-    height: 550px;
+    margin: 30px 0px;
     background: #fff;
     color: #000;
     top: 50%;
     left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
     padding: 30px 0px 30px;
     display: flex;
     flex-direction: column;
@@ -42,54 +40,25 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 70%;
-    height: 70%;
-}
-
-.input {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-}
-
-.input input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-    font-family: sans-serif;
+    height: 100%;
 }
 
 .disabled {
     margin: 0px 0px 30px 0px;
 }
 
-.fallo {
+.big{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.input {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    margin: 10px 0px 20px;
-}
-
-.fallo label {
-    margin: 0px 0px 10px;
-    padding: 0;
-    font-weight: bold;
-    display: block;
-}
-
-.fallo input {
-    padding-bottom: 80%;
-}
-
-.botones {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
