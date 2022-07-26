@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, request, redirect, url_for, session
 from flask_mysqldb import MySQL, MySQLdb
 
-# pip install Flask Flask-MySQLdb Flask_wtf Flask_login
+# pip install Flask Flask-MySQLdb
 
 
 # Conexion BD
