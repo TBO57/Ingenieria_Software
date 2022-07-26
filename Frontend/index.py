@@ -27,9 +27,6 @@ def login_admin():
         usuario = request.form['username']
         password = request.form['password']
 
-        # print(usuario)
-        # print(password)f
-
         cur = db.connection.cursor()
         cur.execute(
             "SELECT * FROM administrador WHERE Usuario='{0}'".format(usuario))
