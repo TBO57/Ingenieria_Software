@@ -87,26 +87,38 @@ def registro_operador():
         nom2 = request.form['segundonombre']
         ape1 = request.form['primerapellido']
         ape2 = request.form['segundoapellido']
-        user = request.form['username']
+        usern = request.form['username']
         password = request.form['password']
         numtel = request.form['ntelefono']
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
-        db.connection.commit()
-
-        cur = db.connection.cursor()
         cur.execute(
-            "INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)", (user, password))
+            "SELECT * FROM persona WHERE N_Documento='{0}'".format(numdoc))
+        user = cur.fetchone()
+        cur.close()
 
-        db.connection.commit()
+        print(user)
 
-        flash("El registro del operador ha sido exitoso")
-        print("Funcionando")
+        if user == None:
 
-        return redirect('/admin/registro_operador')
+            cur = db.connection.cursor()
+            cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                        (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+            db.connection.commit()
+
+            cur = db.connection.cursor()
+            cur.execute(
+                "INSERT INTO operador (Persona_Id, Usuario, Contrasena) VALUES ((SELECT MAX(Id) FROM persona), %s, %s)", (usern, password))
+
+            db.connection.commit()
+
+            flash("El registro del operador ha sido exitoso")
+            return redirect('/admin/registro_operador')
+
+        else:
+            flash("El operador ya está registrado")
+            return redirect('/admin/registro_operador')
 
 
 @app.route('/admin/registro_estudiante', methods=['GET', 'POST'])
@@ -127,22 +139,36 @@ def adm_registro_estudiante():
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
-        db.connection.commit()
-
-        cur = db.connection.cursor()
         cur.execute(
-            "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
-        db.connection.commit()
+            "SELECT * FROM persona WHERE N_Documento='{0}'".format(numdoc))
+        user = cur.fetchone()
+        cur.close()
 
-        cur = db.connection.cursor()
-        cur.execute(
-            "INSERT INTO cuenta (Estudiante_idEstudiante,N_almuerzo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
-        db.connection.commit()
+        print(user)
 
-        flash("El registro del estudiante ha sido exitoso")
-        return redirect('/admin/registro_estudiante')
+        if user == None:
+
+            cur = db.connection.cursor()
+            cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                        (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+            db.connection.commit()
+
+            cur = db.connection.cursor()
+            cur.execute(
+                "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
+            db.connection.commit()
+
+            cur = db.connection.cursor()
+            cur.execute(
+                "INSERT INTO cuenta (Estudiante_idEstudiante,N_almuerzo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
+            db.connection.commit()
+
+            flash("El registro del estudiante ha sido exitoso")
+            return redirect('/admin/registro_estudiante')
+
+        else:
+            flash("Este estudiante ya está registrado")
+            return redirect('/admin/registro_estudiante')
 
 
 @app.route('/admin/recarga', methods=['GET', 'POST'])
@@ -242,12 +268,26 @@ def adm_actualizar_estudiante():
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
-                    (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
-        db.connection.commit()
+        cur.execute(
+            "SELECT * FROM persona WHERE N_Documento='{0}'".format(numdoc))
+        user = cur.fetchone()
+        cur.close()
 
-        flash("Actualización realizada con éxito")
-        return redirect('/admin/actualizar_estudiante')
+        print(user)
+
+        if user != None:
+
+            cur = db.connection.cursor()
+            cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
+                        (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
+            db.connection.commit()
+
+            flash("Actualización realizada con éxito")
+            return redirect('/admin/actualizar_estudiante')
+
+        else:
+            flash("Este estudiante no se encuentra registrado")
+            return redirect('/admin/actualizar_estudiante')
 
 
 @app.route('/admin/reporte')
@@ -342,22 +382,36 @@ def op_registro_estudiante():
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
-        db.connection.commit()
-
-        cur = db.connection.cursor()
         cur.execute(
-            "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
-        db.connection.commit()
+            "SELECT * FROM persona WHERE N_Documento='{0}'".format(numdoc))
+        user = cur.fetchone()
+        cur.close()
 
-        cur = db.connection.cursor()
-        cur.execute(
-            "INSERT INTO cuenta (Estudiante_idEstudiante,N_almuerzo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
-        db.connection.commit()
+        print(user)
 
-        flash("El registro del estudiante ha sido exitoso")
-        return redirect('/operador/registro_estudiante')
+        if user == None:
+
+            cur = db.connection.cursor()
+            cur.execute("INSERT INTO persona (N_Documento, Tipo_Documento, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Correo, Celular) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                        (numdoc, tipo, nom1, nom2, ape1, ape2, email, numtel))
+            db.connection.commit()
+
+            cur = db.connection.cursor()
+            cur.execute(
+                "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
+            db.connection.commit()
+
+            cur = db.connection.cursor()
+            cur.execute(
+                "INSERT INTO cuenta (Estudiante_idEstudiante,N_almuerzo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
+            db.connection.commit()
+
+            flash("El registro del estudiante ha sido exitoso")
+            return redirect('/operador/registro_estudiante')
+
+        else:
+            flash("Este estudiante ya está registrado")
+            return redirect('/operador/registro_estudiante')
 
 
 @app.route('/operador/recarga', methods=['GET', 'POST'])
@@ -456,14 +510,26 @@ def op_actualizar_estudiante():
         email = request.form['email']
 
         cur = db.connection.cursor()
-        cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
-                    (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
-        db.connection.commit()
+        cur.execute(
+            "SELECT * FROM persona WHERE N_Documento='{0}'".format(numdoc))
+        user = cur.fetchone()
+        cur.close()
 
-        print("funcionando")
+        print(user)
 
-        flash("Actualización realizada con éxito")
-        return redirect('/operador/actualizar_estudiante')
+        if user != None:
+
+            cur = db.connection.cursor()
+            cur.execute("UPDATE persona SET N_Documento = %s, Tipo_Documento = %s, Primer_Nombre = %s, Segundo_Nombre   = %s, Primer_Apellido = %s, Segundo_Apellido = %s, Correo = %s, Celular = %s WHERE N_Documento = %s",
+                        (int(numdoc), tipo, nom1, nom2, ape1, ape2, email, int(numtel), int(numdoc)))
+            db.connection.commit()
+
+            flash("Actualización realizada con éxito")
+            return redirect('/operador/actualizar_estudiante')
+
+        else:
+            flash("Este estudiante no se encuentra registrado")
+            return redirect('/operador/actualizar_estudiante')
 
 
 @app.route('/operador/reporte', methods=['GET', 'POST'])
