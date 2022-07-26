@@ -137,7 +137,7 @@ def adm_registro_estudiante():
         db.connection.commit()
 
         flash("El registro del estudiante ha sido exitoso")
-        return redirect('/admin/inicio')
+        return redirect('/admin/registro_estudiante')
 
 
 @app.route('/admin/recarga', methods=['GET', 'POST'])
@@ -154,7 +154,6 @@ def recarga_admin():
             "SELECT * FROM persona WHERE N_Documento='{0}'".format(ndocumento))
         user = cur.fetchone()
         cur.close()
-
 
         if user != None:
 
@@ -180,14 +179,21 @@ def recarga_admin():
                 acc = query2.fetchone()
                 query2.close()
 
+                accserial = int(acc[0])
+                valorf = int(valor)
                 saldo = int(acc[2])
 
-                valortotal = int(valor) + saldo
+                valortotal = valorf + saldo
 
                 if valortotal < 50:
 
                     insert = db.connection.cursor()
                     insert.execute(
+                        "INSERT INTO transferencia (Cuenta_Serial, Valor) VALUES (%s,%s)", (accserial, valorf))
+                    db.connection.commit()
+
+                    update = db.connection.cursor()
+                    update.execute(
                         "UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
                     db.connection.commit()
 
@@ -207,7 +213,6 @@ def recarga_admin():
         else:
             flash("El Usuario no está registrado")
             print("Este Usuario no está registrado")
-
             return render_template('/admin/recarga.html')
     else:
 
@@ -262,7 +267,7 @@ def reporte3():
 # ///////////////////////////////////////rutas admin////////////////////////////////
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 
 # ///////////////////////////////////////rutas operador/////////////////////////////
@@ -342,7 +347,7 @@ def op_registro_estudiante():
         db.connection.commit()
 
         flash("El registro del estudiante ha sido exitoso")
-        return redirect('/operador/inicio')
+        return redirect('/operador/registro_estudiante')
 
 
 @app.route('/operador/recarga', methods=['GET', 'POST'])
@@ -360,7 +365,6 @@ def recarga_operador():
         user = cur.fetchone()
         cur.close()
 
-        
         if user != None:
 
             userdoc = str(user[1])
@@ -385,11 +389,18 @@ def recarga_operador():
                 acc = query2.fetchone()
                 query2.close()
 
+                accserial = int(acc[0])
+                valorf = int(valor)
                 saldo = int(acc[2])
 
-                valortotal = int(valor) + saldo
+                valortotal = valorf + saldo
 
                 if valortotal < 50:
+
+                    insert = db.connection.cursor()
+                    insert.execute(
+                        "INSERT INTO transferencia (Cuenta_Serial, Valor) VALUES (%s,%s)", (accserial, valorf))
+                    db.connection.commit()
 
                     insert = db.connection.cursor()
                     insert.execute(
@@ -462,6 +473,7 @@ def interfaz_reporte():
     else:
 
         return render_template('/op/reporteFallos.html')
+
 
 if __name__ == '__main__':
     app.secret_key = "thisappissafe"
