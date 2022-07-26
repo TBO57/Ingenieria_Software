@@ -1,0 +1,13 @@
+Paso 1 instalación de python:
+Recomendamos la instalación de python 3.10.0, la cual es la versión usada en este aplicativo
+https://www.python.org/downloads/
+
+
+Paso 2 instalación de paquetes python:
+Estos son los paquetes necesarios para ejecutar el aplicativo
+pip install Flask Flask-MySQLdb
+
+
+Paso 3 instalación de gestor de base de datos:
+Para poder manipular los datos del aplicativo, es necesario instalar un gestor de base de datos, en nuestro caso instalaremos MySQl con el paquete XAMPP.
+https://www.apachefriends.org/es/index.html
