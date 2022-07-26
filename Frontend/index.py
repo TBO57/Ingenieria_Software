@@ -136,6 +136,11 @@ def adm_registro_estudiante():
             "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
         db.connection.commit()
 
+        cur = db.connection.cursor()
+        cur.execute(
+            "INSERT INTO cuenta (Estudiante_idEstudiante,Saldo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
+        db.connection.commit()
+
         flash("El registro del estudiante ha sido exitoso")
         return redirect('/admin/registro_estudiante')
 
@@ -344,6 +349,11 @@ def op_registro_estudiante():
         cur = db.connection.cursor()
         cur.execute(
             "INSERT INTO estudiante (Persona_ID) VALUES ((SELECT MAX(Id) FROM persona))")
+        db.connection.commit()
+
+        cur = db.connection.cursor()
+        cur.execute(
+            "INSERT INTO cuenta (Estudiante_idEstudiante,Saldo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
         db.connection.commit()
 
         flash("El registro del estudiante ha sido exitoso")
