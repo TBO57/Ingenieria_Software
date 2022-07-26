@@ -138,7 +138,7 @@ def adm_registro_estudiante():
 
         cur = db.connection.cursor()
         cur.execute(
-            "INSERT INTO cuenta (Estudiante_idEstudiante,Saldo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
+            "INSERT INTO cuenta (Estudiante_idEstudiante,N_almuerzo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
         db.connection.commit()
 
         flash("El registro del estudiante ha sido exitoso")
@@ -199,7 +199,7 @@ def recarga_admin():
 
                     update = db.connection.cursor()
                     update.execute(
-                        "UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
+                        "UPDATE cuenta SET N_almuerzo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
                     db.connection.commit()
 
                     flash("Recarga realizada con éxito")
@@ -353,7 +353,7 @@ def op_registro_estudiante():
 
         cur = db.connection.cursor()
         cur.execute(
-            "INSERT INTO cuenta (Estudiante_idEstudiante,Saldo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
+            "INSERT INTO cuenta (Estudiante_idEstudiante,N_almuerzo) VALUES ((SELECT MAX(idEstudiante) FROM estudiante),0)")
         db.connection.commit()
 
         flash("El registro del estudiante ha sido exitoso")
@@ -414,7 +414,7 @@ def recarga_operador():
 
                     insert = db.connection.cursor()
                     insert.execute(
-                        "UPDATE cuenta SET Saldo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
+                        "UPDATE cuenta SET N_almuerzo=%s WHERE Estudiante_idEstudiante=%s", (valortotal, idest))
                     db.connection.commit()
 
                     flash("Recarga realizada con éxito")
